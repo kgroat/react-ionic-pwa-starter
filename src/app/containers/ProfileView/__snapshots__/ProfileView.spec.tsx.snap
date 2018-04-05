@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Connect /> snapshots should render correctly 1`] = `
+<View>
+  <ion-header>
+    <ion-toolbar
+      color="primary"
+    >
+      <ion-menu-button />
+      <ion-title>
+        Profile
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content
+    class="refreshContent"
+  >
+    <ion-scroll
+      class="padded"
+    />
+  </ion-content>
+</View>
+`;

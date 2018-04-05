@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "esnext.asynciterable",
+      "dom",
+      "webworker"
+    ],
+    "jsx": "react",
+    "strictNullChecks": true,
+    "allowJs": false,
+    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "baseUrl": "../src",
+    "paths": {
+      "components/*": ["app/components/*"],
+      "containers/*": ["app/containers/*"],
+      "redux-store": ["app/redux-store"],
+      "redux-store/*": ["app/redux-store/*"],
+      "actions/*": ["app/redux-store/actions/*"],
+      "thunks/*": ["app/redux-store/thunks/*"],
+      "state": ["app/state"],
+      "state/*": ["app/state/*"],
+      "appConfig": ["app/appConfig"],
+
+      "api/*": ["server/api/*"],
+      "services/*": ["server/services/*"],
+
+      "@ionic/core": ["../node_modules/@ionic/core"],
+      "@ionic/core/*": ["../node_modules/@ionic/core/*"]
+    }
+  },
+  "include": [
+    "../src"
+  ],
+  "exclude": [
+    "../src/seviceWorker",
+    "../node_modules",
+    "../**/*.spec.*"
+  ]
+}

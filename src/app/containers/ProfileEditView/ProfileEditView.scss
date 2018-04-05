@@ -1,0 +1,15 @@
+
+@import '~@ionic/core/dist/collection/themes/ionic.theme.default.scss';
+
+.profileEditView {
+  ion-card-header {
+    background: map-get(map-get($colors, tertiary), base);
+    color: map-get(map-get($colors, tertiary), contrast);
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  ion-label {
+    font-weight: bold;
+  }
+}

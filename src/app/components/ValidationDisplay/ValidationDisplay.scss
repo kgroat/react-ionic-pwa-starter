@@ -1,0 +1,24 @@
+
+@import '~@ionic/core/dist/collection/themes/ionic.theme.default.scss';
+
+.validationResult {
+  flex: 1;
+  padding: 10px;
+  background: map-get(map-get($colors, secondary), base);
+  color: map-get(map-get($colors, secondary), contrast);
+
+  &.withSuccess {
+    background: map-get(map-get($colors, success), base);
+    color: map-get(map-get($colors, success), contrast);
+  }
+
+  &.withWarning {
+    background: map-get(map-get($colors, warning), base);
+    color: map-get(map-get($colors, warning), contrast);
+  }
+
+  &.withError {
+    background: map-get(map-get($colors, danger), base);
+    color: map-get(map-get($colors, danger), contrast);
+  }
+}

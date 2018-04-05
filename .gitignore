@@ -1,0 +1,17 @@
+
+# OS and editor files
+.DS_Store
+.vscode
+
+# Dependency files
+node_modules
+
+# Generated files
+/public
+/server
+/coverage
+/.serverless
+
+# Development / deployment configuration files
+/.env
+/secrets.yml

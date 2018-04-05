@@ -1,0 +1,37 @@
+
+service: react-ionic-pwa-server
+
+package:
+  include:
+    - public
+    - server
+    - package.json
+  ignore:
+    - secrets.yml
+  excludeDevDependencies: false
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  stage: ${opt:stage, self:custom.defaultStage}
+  profile: ${self:custom.profiles.${self:provider.stage}}
+  environment:
+    AUTH_SECRET: "${self:custom.secrets.AUTH_SECRET}"
+    MONGO_URL: "${self:custom.secrets.MONGO_URL}"
+    FCM_KEY: "${self:custom.secrets.FCM_KEY}"
+    PASSWORD_SALT_ITERATIONS: "${self:custom.secrets.PASSWORD_SALT_ITERATIONS}"
+
+custom:
+  secrets: ${file(./secrets.yml):${self:provider.stage}}
+  defaultStage: dev
+  profiles:
+    dev: personal
+    prod: personal
+
+functions:
+  server:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

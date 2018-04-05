@@ -1,0 +1,27 @@
+{
+  "name": "React Ionic PWA Starter",
+  "short_name": "React PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#488aff",
+  "theme_color": "#488aff",
+  "gcm_sender_id": "990330873243",
+  "theme": {
+    "images": {
+      "headerURL": "icon.png"
+    },
+    "colors": {
+      "accentcolor": "#488aff",
+      "frame": "#488aff",
+      "toolbar": "#488aff",
+      "tab_loading": "#d26f43",
+      "textcolor": "#000"
+    }
+  }
+}

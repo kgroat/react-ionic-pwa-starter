@@ -1,0 +1,23 @@
+
+<% endpoint = 'https://pwa.kevingroat.io/verify/' + user.username + '/' + user.verificationKey %>
+<div>
+  <main>
+    <header>Welcome!</header>
+    <div class="content">
+      <p>
+        To verify your email, click the link below, or visit: <%= endpoint %>
+      </p>
+      <p class="center" style="padding-top: 1em;">
+        <a class="button" href="<%= endpoint %>">Verify My Email</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    For help, email <a href="mailto:<%= package.pushEmail %>"><%= package.pushEmail %></a>.
+  </footer>
+
+  <style type="text/css">
+    <%= defaultStyle %>
+  </style>
+</div>

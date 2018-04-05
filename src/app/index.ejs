@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= htmlWebpackPlugin.options.package.appName %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.package.description %>">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.package.appName %>">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#488aff">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+    <base href="<%= htmlWebpackPlugin.options.baseUrl %>">
+  </head>
+  <body>
+    <div id="app">
+    </div>
+  </body>
+</html>

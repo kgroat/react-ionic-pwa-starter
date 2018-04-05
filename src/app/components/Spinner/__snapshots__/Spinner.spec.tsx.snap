@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Spinner /> shapshots should render 1`] = `
+<svg
+  className="spinner "
+  style={undefined}
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    className="path"
+    cx={50}
+    cy={50}
+    fill="none"
+    r={45}
+    strokeLinecap="round"
+    strokeWidth={10}
+  />
+</svg>
+`;
+
+exports[`<Spinner /> shapshots should render with the given className 1`] = `
+<svg
+  className="spinner myClass"
+  style={undefined}
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    className="path"
+    cx={50}
+    cy={50}
+    fill="none"
+    r={45}
+    strokeLinecap="round"
+    strokeWidth={10}
+  />
+</svg>
+`;
+
+exports[`<Spinner /> shapshots should render with the given style 1`] = `
+<svg
+  className="spinner "
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+    }
+  }
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    className="path"
+    cx={50}
+    cy={50}
+    fill="none"
+    r={45}
+    strokeLinecap="round"
+    strokeWidth={10}
+  />
+</svg>
+`;
