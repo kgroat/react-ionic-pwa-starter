@@ -66,6 +66,7 @@ export class ProfileView extends React.Component<Props, State> {
         title='Edit Your Profile'
         loading={!user}
         className={profileEditView}
+        noMenu
       >
         {this.renderNetworkStatus()}
         {this.renderContent()}
@@ -97,22 +98,20 @@ export class ProfileView extends React.Component<Props, State> {
               <h2>{user.email}</h2>
             </ion-item>
             <ion-item>
-              <ion-label color='tertiary'>First Name</ion-label>
-              <Input value={firstName} placeholder='First Name' onIonInput={this.setStateVal('firstName')} />
+              <ion-label color='tertiary' stacked>First Name</ion-label>
+              <Input autofocus value={firstName} placeholder='First Name' onIonInput={this.setStateVal('firstName')} />
             </ion-item>
             <ion-item>
-              <ion-label color='tertiary'>Last Name</ion-label>
+              <ion-label color='tertiary' stacked>Last Name</ion-label>
               <Input value={lastName} placeholder='Last Name' onIonInput={this.setStateVal('lastName')} />
             </ion-item>
-            <ion-item>
-            <ion-button color='light' onClick={this.cancel}>
-              Cancel
-            </ion-button>
-            <ion-button color='primary' disabled={waiting || success} onClick={this.submit}>
-              Save
-            </ion-button>
-            </ion-item>
           </ion-list>
+          <ion-button color='primary' disabled={waiting || success} onClick={this.submit} expand='block'>
+            Save
+          </ion-button>
+          <ion-button color='light' onClick={this.cancel} expand='block'>
+            Cancel
+          </ion-button>
         </ion-card-content>
       </ion-card>
     )

@@ -19,7 +19,7 @@ To run locally:
 To run the tests:
 * `npm test`
 
-To build a production bundle and start the server:
+To test a production bundle locally:
 * `npm run build`
 * `npm start`
 

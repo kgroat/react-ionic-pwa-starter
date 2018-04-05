@@ -22,6 +22,8 @@ import { AppState } from 'state'
 import { HttpError } from 'shared/statusCodes'
 import { sleep, REDIRECT_WAIT } from 'shared/helpers'
 
+import { buttonGroup } from './RegisterView.scss'
+
 interface OwnProps extends RouteComponentProps<void> {
 }
 
@@ -116,13 +118,15 @@ class LoginViewBase extends React.Component<Props, State> {
                 : null
               }
             </ion-item>
-            <ion-item>
-              <ion-button color='light' onClick={this.cancel}>Cancel</ion-button>
-              <ion-button color='primary' disabled={this.hasErrors()} onClick={this.submit}>
-                Register
-              </ion-button>
-            </ion-item>
           </ion-list>
+          <div className={buttonGroup}>
+            <ion-button color='primary' disabled={this.hasErrors()} onClick={this.submit} expand='block'>
+              Register
+            </ion-button>
+            <ion-button color='light' onClick={this.cancel} expand='block'>
+              Cancel
+            </ion-button>
+          </div>
         </ion-content>
       </View>
     )

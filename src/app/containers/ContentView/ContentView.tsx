@@ -82,7 +82,7 @@ class ContentView extends React.PureComponent<Props, State> {
 
     if (backButton) {
       return (
-        <ion-button onClick={goBack}>
+        <ion-button onClick={goBack} buttonType='bar-button'>
           <ion-icon name='arrow-back' />
         </ion-button>
       )

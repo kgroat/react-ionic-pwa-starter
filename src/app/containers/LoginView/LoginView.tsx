@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
+import { replace } from 'react-router-redux'
 import { Link, Redirect } from 'react-router-dom'
 
 import IonInput from 'components/Ionic/Input'
@@ -12,6 +13,8 @@ import loginThunk from 'thunks/login'
 import { AppState } from 'state'
 import { HttpError } from 'shared/statusCodes'
 import { sleep, REDIRECT_WAIT } from 'shared/helpers'
+
+import { buttonGroup, spacer } from './LoginView.scss'
 
 interface OwnProps extends RouteComponentProps<void> {
 }
@@ -65,17 +68,18 @@ class LoginViewBase extends React.Component<Props, State> {
               <IonInput type='password' placeholder='Password' value={password} onIonInput={this.onPasswordChange} />
             </ion-item>
           </ion-list>
-          <ion-item>
-            <ion-button color='light' onClick={this.cancel}>Cancel</ion-button>
-            <ion-button color='primary' disabled={this.hasErrors() || waiting} onClick={this.submit}>
+          <div className={buttonGroup}>
+            <ion-button color='primary' disabled={this.hasErrors() || waiting} onClick={this.submit} expand='block'>
               Login
             </ion-button>
-          </ion-item>
-          <ion-item>
-            <Link to='/register' replace>
+            <ion-button color='light' onClick={this.cancel} expand='block'>
+              Cancel
+            </ion-button>
+            <div className={spacer} />
+            <ion-button color='light' disabled={waiting} onClick={() => this.props.redirectTo('/register')} expand='block'>
               Register
-            </Link>
-          </ion-item>
+            </ion-button>
+          </div>
         </ion-content>
       </View>
     )
@@ -160,6 +164,7 @@ interface StateProps {
 
 interface DispatchProps {
   login: (username: string, password: string) => Promise<void>
+  redirectTo: (location: string) => void
 }
 
 const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
@@ -168,6 +173,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch) => ({
     login: (username, password) => dispatch(loginThunk({ username, password })),
+    redirectTo: (location) => dispatch(replace(location))
   }),
 )
 

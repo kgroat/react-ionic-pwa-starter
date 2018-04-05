@@ -42,6 +42,7 @@ export class ProfileView extends React.Component<Props, State> {
   render () {
     const { user } = this.props
     const { notFound, error } = this.state
+    const showBackButton = !!this.props.match.params.username
 
     return (
       <ContentView
@@ -49,7 +50,7 @@ export class ProfileView extends React.Component<Props, State> {
         refresh={this.fetch}
         loading={!user && !notFound && !error}
         className={profileView}
-        backButton
+        backButton={showBackButton}
       >
         {this.renderContent()}
         {this.renderEdit()}

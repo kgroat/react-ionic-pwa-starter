@@ -19,7 +19,7 @@ class SideMenu extends React.Component<Props> {
 
   render () {
     return (
-      <Menu ref={ref => this.menu = ref} contentId='test'>
+      <Menu ref={ref => this.menu = ref} contentId='test' type='overlay'>
         <ion-content>
           <ion-list>
             <ion-item>
