@@ -3,10 +3,10 @@
 
 ## Prerequisites
 
-* NodeJS LTS (Download)[https://nodejs.org/en/]
-* Docker (Download)[https://www.docker.com/community-edition] (Only required for serverless deployment)
+* NodeJS LTS [Download](https://nodejs.org/en/)
+* Docker [Download](https://www.docker.com/community-edition) (Only required for serverless deployment)
   - If you are on MacOS / Windows, ensure that your development directory is available
-  - See the documentation for (MacOS)[https://docs.docker.com/docker-for-mac/#file-sharing] or (Windows)[https://docs.docker.com/docker-for-windows/#shared-drives]
+  - See the documentation for [MacOS](https://docs.docker.com/docker-for-mac/#file-sharing) or [Windows](https://docs.docker.com/docker-for-windows/#shared-drives)
 
 ## Quickstart
 
