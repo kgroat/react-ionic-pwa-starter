@@ -58,7 +58,7 @@ class LoginViewBase extends React.Component<Props, State> {
             {this.renderStatus()}
             <ion-item>
               <ion-label color='primary' stacked>Username</ion-label>
-              <IonInput placeholder='Username' value={username} onIonInput={this.onUsernameChange} />
+              <IonInput autofocus placeholder='Username' value={username} onIonInput={this.onUsernameChange} />
             </ion-item>
             <ion-item>
               <ion-label color='primary' stacked>Password</ion-label>

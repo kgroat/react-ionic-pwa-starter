@@ -29,5 +29,6 @@ To build and deploy to AWS Lambda (dev/prod stage):
 
 ## Generators
 
-To create a new container:
+To create a new React container:
 * `npm run generate:container [ContainerName]`
+  - Note: the word `View` will automatically be appended to your `ContainerName`

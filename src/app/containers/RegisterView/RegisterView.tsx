@@ -91,7 +91,7 @@ class LoginViewBase extends React.Component<Props, State> {
             {this.renderStatus()}
             <ion-item>
               <ion-label stacked color={!emailErrors || emailErrors.passes ? 'primary' : 'danger'}>Email</ion-label>
-              <IonInput placeholder='Email' debounce={DEBOUNCE_MS} value={email} onIonInput={this.onEmailChange} />
+              <IonInput autofocus placeholder='Email' debounce={DEBOUNCE_MS} value={email} onIonInput={this.onEmailChange} />
               {this.renderEmailErrors()}
             </ion-item>
             <ion-item>
