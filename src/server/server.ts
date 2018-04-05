@@ -2,6 +2,7 @@
 import * as express from 'express'
 import * as path from 'path'
 
+import { BaseError } from './errors'
 import apiRouter from './api'
 
 const { serverPort, webpackPort } = require('../../package.json')
@@ -25,12 +26,21 @@ app.get('*', (req, res) => {
   res.sendFile(`${publicDir}/index.html`)
 })
 
-app.use(((err, req, res, next) => {
+app.use(((err: Error, req, res, next) => {
+  const status = (err as any).status || 500
+  if (__DEV__) {
+    console.error(status, err)
+  }
+
+  if (!(err instanceof BaseError)) {
+    console.warn('An unexpected error occurred', err.message, err.stack)
+  }
+
   if (res.headersSent) {
     return next(err)
   }
 
-  return res.status(err.status || 500).send(err && err.message || 'Something went wrong')
+  return res.status(status).send(err && err.message || 'Something went wrong')
 }) as express.ErrorRequestHandler)
 
 export default app

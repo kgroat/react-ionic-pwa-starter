@@ -1,34 +1,22 @@
 
-body {
+.body {
   background: #CCCCCC;
   font-size: 15px;
   padding: 0;
   margin: 0;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    font-size: 10px;
-  }
+.inset {
+  padding: 1.5em;
 }
 
-main {
-  margin: 1.5em;
+.main {
   background: white;
   border-radius: 1em;
-  position: relative;
   overflow: hidden;
-
-  .content {
-    padding: 1em;
-
-    p:nth-child(1) {
-      margin-top: 0;
-    }
-  }
 }
 
-header {
+.header {
   background: #488aff;
   color: white;
   font-weight: bold;
@@ -37,11 +25,14 @@ header {
   font-size: 1.5em;
 }
 
-footer {
+.content {
+  padding: 1em;
+}
+
+.footer {
   background: #444444;
   color: white;
   font-size: 0.8em;
-  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;

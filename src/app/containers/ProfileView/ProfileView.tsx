@@ -49,6 +49,7 @@ export class ProfileView extends React.Component<Props, State> {
         refresh={this.fetch}
         loading={!user && !notFound && !error}
         className={profileView}
+        backButton
       >
         {this.renderContent()}
         {this.renderEdit()}

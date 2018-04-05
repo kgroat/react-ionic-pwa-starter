@@ -4,7 +4,8 @@ import * as catcher from 'async-catcher'
 
 import { FORBIDDEN, BAD_REQUEST } from 'shared/statusCodes'
 import * as userService from 'services/userService'
-import * as EmailService from 'services/emailService'
+import * as emailService from 'services/emailService'
+import * as templateService from 'services/templateService'
 import { requireAuth, useAuth, createToken } from 'services/authService'
 
 import * as userTypes from './types'
@@ -41,7 +42,7 @@ router.post(`/verify/resend`, requireAuth, catcher(async (req, res) => {
   }
 
   console.log('user', req.userUNSAFE)
-  const response = await EmailService.sendVerifyEmail(req.userUNSAFE!)
+  const response = await emailService.sendVerifyEmail(req.userUNSAFE!)
 
   res.send({
     success: true

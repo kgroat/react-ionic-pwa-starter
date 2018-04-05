@@ -1,6 +1,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { goBack } from 'react-router-redux'
 
 import Toolbar from 'components/Ionic/Toolbar'
 import PassThrough from 'components/PassThrough'
@@ -20,13 +21,14 @@ import { contentView, padded } from './ContentView.scss'
 
 interface OwnProps {
   title: string
+  className?: string
   refresh?: () => Promise<any>
   padding?: boolean
   noMenu?: boolean
   noVerificationWarning?: boolean
   rawContent?: boolean
   loading?: boolean
-  className?: string
+  backButton?: boolean
 }
 
 type Props = OwnProps & StateProps & DispatchProps
@@ -61,7 +63,7 @@ class ContentView extends React.PureComponent<Props, State> {
       <View>
         <ion-header>
           <Toolbar color='primary'>
-            { noMenu ? null : <ion-menu-button /> }
+            {this.renderToolbarButton()}
             <ion-title>{title}</ion-title>
           </Toolbar>
         </ion-header>
@@ -69,6 +71,27 @@ class ContentView extends React.PureComponent<Props, State> {
         {this.renderContent()}
       </View>
     )
+  }
+
+  private renderToolbarButton = () => {
+    const {
+      backButton,
+      noMenu,
+      goBack,
+    } = this.props
+
+    if (backButton) {
+      return (
+        <ion-button onClick={goBack}>
+          <ion-icon name='arrow-back' />
+        </ion-button>
+      )
+    }
+    if (noMenu) {
+      return null
+    }
+
+    return <ion-menu-button />
   }
 
   private renderChildren = () => {
@@ -178,6 +201,7 @@ interface StateProps {
 
 interface DispatchProps {
   fetchUser: () => Promise<void>
+  goBack: () => void
 }
 
 const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
@@ -187,6 +211,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch) => ({
     fetchUser: () => dispatch(fetchUserThunk()),
+    goBack: () => dispatch(goBack())
   }),
 )
 

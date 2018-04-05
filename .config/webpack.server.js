@@ -63,16 +63,13 @@ module.exports = Object.assign({}, base, {
         test: /\.s?css$/,
         use: [
           {
-            loader: "css-loader",
-            options: {
-              importLoaders: 3,
-            }
+            loader: 'inline-css-webpack-loader',
           },
           {
             loader: 'resolve-url-loader',
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
           }
         ]
       },
