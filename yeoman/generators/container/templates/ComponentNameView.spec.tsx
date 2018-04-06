@@ -9,17 +9,17 @@ const createMockStore: typeof reduxMockStore.default = reduxMockStore as any
 import thunk from 'redux-thunk'
 const mockStore = createMockStore([thunk])
 
-import ConnectedCOMPONENT_NAMEView, { COMPONENT_NAMEView } from './COMPONENT_NAMEView'
+import ConnectedComponentNameView, { ComponentNameView } from './ComponentNameView'
 
 jest.mock('containers/ContentView')
 
-describe(`<${COMPONENT_NAMEView.name} />`, () => {
+describe(`<${ComponentNameView.name} />`, () => {
   describe('snapshots', () => {
     const store = mockStore({})
     it('should render correctly', () => {
       const tree = create((
         <MemoryRouter>
-          <Route render={props => <ConnectedCOMPONENT_NAMEView store={store} {...props} />} />
+          <Route render={props => <ConnectedComponentNameView store={store} {...props} />} />
         </MemoryRouter>
       ))
 

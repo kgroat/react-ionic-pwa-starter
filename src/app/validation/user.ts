@@ -23,5 +23,5 @@ export const verifyEmailNotTaken = makeAsyncValidator<string>({
     if (!email) {
       return 'A user with that email already exists'
     }
-  }]
+  }],
 })

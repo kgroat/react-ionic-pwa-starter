@@ -49,6 +49,7 @@ export class ProfileView extends React.Component<Props, State> {
   componentDidMount () {
     if (!this.props.user) {
       this.props.fetchUser()
+        .catch(() => null)
     }
   }
 
@@ -160,7 +161,6 @@ export class ProfileView extends React.Component<Props, State> {
       lastName,
     })
   }
-
 
   private cancel = () => {
     this.props.history.goBack()

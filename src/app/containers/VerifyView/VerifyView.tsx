@@ -42,6 +42,7 @@ export class VerifyView extends React.Component<Props, State> {
 
   componentDidMount () {
     this.verify()
+      .catch(() => null)
   }
 
   render () {
@@ -110,7 +111,7 @@ export class VerifyView extends React.Component<Props, State> {
 
     const fetchedUser = await fetchUser()
 
-    this.finish(fetchedUser.verified)
+    return this.finish(fetchedUser.verified)
   }
 
   private finish = async (success: boolean | null, error: string = '') => {
@@ -133,7 +134,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
     user: state.entities.users.me,
   }),
   (dispatch) => ({
-    fetchUser: () => dispatch(fetchUserThunk())
+    fetchUser: () => dispatch(fetchUserThunk()),
   }),
 )
 

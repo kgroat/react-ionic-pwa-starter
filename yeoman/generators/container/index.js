@@ -7,7 +7,7 @@ module.exports = class ContainerGenerator extends FileTemplateGenerator_1.defaul
         super(args, opts);
         this.replacers = [
             {
-                test: /COMPONENT_NAME/g,
+                test: /ComponentName/g,
                 value: () => this.options.componentName
             }
         ];

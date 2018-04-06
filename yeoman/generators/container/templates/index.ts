@@ -1,2 +1,2 @@
 
-export { default } from './COMPONENT_NAMEView'
+export { default } from './ComponentNameView'

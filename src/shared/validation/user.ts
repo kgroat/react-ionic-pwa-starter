@@ -44,7 +44,6 @@ export const verifyUsername = makeValidator({
   required: usernameTests,
 })
 
-
 const emailRgx = /^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~;\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/
 export const emailTests: SyncValidatorFunction<string>[] = [
   (email) => {
@@ -57,4 +56,3 @@ export const emailTests: SyncValidatorFunction<string>[] = [
 export const verifyEmail = makeValidator({
   required: emailTests,
 })
-

@@ -1,11 +1,10 @@
 
-import { UNAUTHORIZED, LOGIN_TIMEOUT } from 'shared/statusCodes'
+import { UNAUTHORIZED, LOGIN_TIMEOUT, HttpError } from 'shared/statusCodes'
 import { apiBaseUrl } from 'appConfig'
 import setToken from 'actions/setToken'
 
 import store from './store'
 
-import { HttpError } from 'shared/statusCodes'
 export { HttpError }
 
 function formatUrl (relativeUrl: string) {

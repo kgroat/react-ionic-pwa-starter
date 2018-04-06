@@ -1,7 +1,6 @@
 
 import * as React from 'react'
 import { connect, Store } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
 import { push } from 'react-router-redux'
 
 import Menu from 'components/Ionic/Menu'
@@ -53,10 +52,10 @@ class SideMenu extends React.Component<Props> {
     )
   }
 
-  private goTo = (route: string) => () => {
+  private goTo = (route: string) => async () => {
     this.props.goTo(route)
     if (this.menu) {
-      this.menu.element.close()
+      await this.menu.element.close()
     }
   }
 }
@@ -74,7 +73,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
     isLoggedIn: !!state.auth.token,
   }),
   (dispatch) => ({
-    goTo: (location) => dispatch(push(location))
+    goTo: (location) => dispatch(push(location)),
   }),
 )
 

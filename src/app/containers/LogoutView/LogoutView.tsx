@@ -39,7 +39,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch) => ({
     clearToken: () => dispatch(setToken({ token: null })),
-    resetUser: () => dispatch(storeUser({ id: 'me', user: undefined }))
+    resetUser: () => dispatch(storeUser({ id: 'me', user: undefined })),
   }),
 )
 

@@ -15,7 +15,7 @@ import {
   verifyEmail,
   verifyEmailNotTaken,
 } from 'app/validation/user'
-import { ValidationResult, mergeResults } from 'shared/validation'
+import { ValidationResult } from 'shared/validation'
 
 import registerUserThunk from 'thunks/registerUser'
 import { AppState } from 'state'
@@ -231,7 +231,7 @@ class LoginViewBase extends React.Component<Props, State> {
 
     try {
       await this.props.register(email, username, password, verifyPassword)
-      this.succeed()
+      return this.succeed()
     } catch (err) {
       console.error(err)
       if (err instanceof HttpError) {

@@ -1,6 +1,5 @@
 
-import { createTestAccount, createTransport, getTestMessageUrl, Transporter } from 'nodemailer'
-import * as xoauth2 from 'xoauth2'
+import { createTestAccount, createTransport, getTestMessageUrl } from 'nodemailer'
 
 import { UserUNSAFE } from 'models/user'
 const { noreplyEmail } = require('../../../package.json')
@@ -8,13 +7,12 @@ const { noreplyEmail } = require('../../../package.json')
 import { singletonPromise } from './singletonPromise'
 import { renderTemplate, Data } from './templateService'
 
-
 export const getTransport = singletonPromise(async () => {
   if (__DEV__) {
     const testAccount = await createTestAccount()
 
     const { user, pass, smtp } = testAccount
-    const { host, port, secure } = smtp
+    const { host, port } = smtp
     return createTransport({
       host,
       port,
@@ -22,7 +20,7 @@ export const getTransport = singletonPromise(async () => {
       auth: {
         user,
         pass,
-      }
+      },
     })
   } else {
     if (!process.env.TRANSPORT_AUTH) {

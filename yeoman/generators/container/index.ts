@@ -13,12 +13,12 @@ export = class ContainerGenerator extends FileTemplateGenerator<Options> {
   location: string
   replacers = [
     {
-      test: /COMPONENT_NAME/g,
-      value: () => this.options.componentName
-    }
+      test: /ComponentName/g,
+      value: () => this.options.componentName,
+    },
   ]
 
-  constructor(args, opts) {
+  constructor (args, opts) {
     super(args, opts)
     this.argument('componentName', { type: String, required: true })
     this.option('rootDir', { description: 'The source root directory', alias: 'r', type: String, default: 'src/app' })

@@ -13,7 +13,7 @@ export default abstract class CopyTemplateGenerator<TOpts> extends Generator {
 
   abstract replacers: Replacer[]
 
-  constructor(args, opts) {
+  constructor (args, opts) {
     super(args, opts)
     this.on('error', (err) => {
       if (err) {

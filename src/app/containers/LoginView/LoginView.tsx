@@ -3,7 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { replace } from 'react-router-redux'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import IonInput from 'components/Ionic/Input'
 import View from 'components/View'
@@ -131,7 +131,7 @@ class LoginViewBase extends React.Component<Props, State> {
 
     try {
       await this.props.login(username, password)
-      this.succeed()
+      return this.succeed()
     } catch (err) {
       console.error(err)
       if (err instanceof HttpError) {
@@ -173,7 +173,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch) => ({
     login: (username, password) => dispatch(loginThunk({ username, password })),
-    redirectTo: (location) => dispatch(replace(location))
+    redirectTo: (location) => dispatch(replace(location)),
   }),
 )
 

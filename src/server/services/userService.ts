@@ -16,7 +16,7 @@ export { User, UserUNSAFE }
 
 const COLLECTION_NAME = 'users'
 const getCollection = singletonPromise(() =>
-  getDb().then(db => db.collection<UserUNSAFE>(COLLECTION_NAME))
+  getDb().then(db => db.collection<UserUNSAFE>(COLLECTION_NAME)),
 )
 
 const USERNAME: keyof User = 'username'
@@ -123,7 +123,7 @@ export async function updateUser (username: string, update: UpdateRequest): Prom
   } = update
 
   const collection = await getCollection()
-  const result = await collection.updateOne({ username }, {
+  await collection.updateOne({ username }, {
     $set: {
       firstName,
       lastName,
@@ -149,7 +149,7 @@ export async function verifyUser (username: string, verificationKey: string) {
   }
 
   const collection = await getCollection()
-  const result = await collection.updateOne({ username }, {
+  await collection.updateOne({ username }, {
     $set: { verified: true },
   })
 
@@ -223,7 +223,7 @@ export async function createUNSAFE (options: CreateOptions) {
 
   user._id = response.insertedId
 
-  sendVerifyEmail(user)
+  await sendVerifyEmail(user)
 
   return {
     response,

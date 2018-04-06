@@ -22,6 +22,7 @@ type Props = OwnProps & StateProps & DispatchProps
 export class UsersListView extends React.Component<Props> {
   componentDidMount () {
     this.props.fetchUsersList()
+      .catch(() => null)
   }
 
   render () {

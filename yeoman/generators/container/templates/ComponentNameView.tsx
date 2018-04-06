@@ -16,10 +16,10 @@ interface OwnProps extends RouteComponentProps<RouteParams> {
 
 type Props = OwnProps & StateProps & DispatchProps
 
-export class COMPONENT_NAMEView extends React.Component<Props> {
+export class ComponentNameView extends React.Component<Props> {
   render () {
     return (
-      <ContentView title='COMPONENT_NAME' padding>
+      <ContentView title='ComponentName' padding>
         Hello, World!
       </ContentView>
     )
@@ -39,6 +39,6 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
 )
 
-const ConnectedCOMPONENT_NAMEView = withRedux(COMPONENT_NAMEView)
+const ConnectedComponentNameView = withRedux(ComponentNameView)
 
-export default ConnectedCOMPONENT_NAMEView
+export default ConnectedComponentNameView

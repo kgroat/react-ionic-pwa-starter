@@ -37,6 +37,7 @@ export class ProfileView extends React.Component<Props, State> {
 
   componentDidMount () {
     this.fetch()
+      .catch(() => null)
   }
 
   render () {
@@ -155,7 +156,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch, ownProps) => ({
     fetchUser: () => dispatch(fetchUserThunk(ownProps.match.params.username)),
-    goTo: (location) => dispatch(push(location))
+    goTo: (location) => dispatch(push(location)),
   }),
 )
 

@@ -18,7 +18,7 @@ export function buildFlatMap<S> (childReducer: Reducer<S | undefined>): Reducer<
     const { id } = action
     const newVal = childReducer(prev[id]!, action)
     if (newVal === undefined) {
-      const newOut = {...prev}
+      const newOut = { ...prev }
       delete newOut[id]
       return newOut
     } else {

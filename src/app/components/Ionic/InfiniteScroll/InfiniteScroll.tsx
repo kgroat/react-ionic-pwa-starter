@@ -3,7 +3,7 @@ import * as React from 'react'
 import Base, { EventHandler } from '../_Base'
 
 type Props = JSXElements.IonInfiniteScrollAttributes & {
-  onIonInfinite: EventHandler<HTMLIonInfiniteScrollElement>
+  onIonInfinite: EventHandler<HTMLIonInfiniteScrollElement>,
 }
 
 class IonInfiniteScroll extends Base<Props, HTMLIonInfiniteScrollElement> {

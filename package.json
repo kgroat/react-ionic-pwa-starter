@@ -78,8 +78,7 @@
     "serverless": "^1.26.1",
     "serverless-apigw-binary": "^0.4.4",
     "serverless-http": "^1.5.5",
-    "web-push": "^3.3.0",
-    "xoauth2": "^1.2.0"
+    "web-push": "^3.3.0"
   },
   "devDependencies": {
     "@ionic/core": "^0.1.5",

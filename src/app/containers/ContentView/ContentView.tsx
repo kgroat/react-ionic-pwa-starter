@@ -50,13 +50,13 @@ class ContentView extends React.PureComponent<Props, State> {
     const { isLoggedIn, user, fetchUser } = this.props
     if (isLoggedIn && !user) {
       fetchUser()
+        .catch(() => null)
     }
   }
 
   render () {
     const {
       title,
-      noMenu,
     } = this.props
 
     return (
@@ -92,17 +92,6 @@ class ContentView extends React.PureComponent<Props, State> {
     }
 
     return <ion-menu-button />
-  }
-
-  private renderChildren = () => {
-    return React.Children.map(this.props.children, (child) => {
-      if ((child as React.ReactElement<any>).type) {
-        const element = child as React.ReactElement<any>
-        return React.createElement(element.type, element.props)
-      } else {
-        return child
-      }
-    })
   }
 
   private renderContent = () => {
@@ -211,7 +200,7 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
   (dispatch) => ({
     fetchUser: () => dispatch(fetchUserThunk()),
-    goBack: () => dispatch(goBack())
+    goBack: () => dispatch(goBack()),
   }),
 )
 
