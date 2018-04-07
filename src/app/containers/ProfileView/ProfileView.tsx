@@ -14,7 +14,7 @@ import { AppState } from 'state'
 
 import { profileView } from './ProfileView.scss'
 
-interface RouteParams {
+export interface RouteParams {
   username?: string
 }
 

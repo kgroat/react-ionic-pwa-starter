@@ -1,7 +1,6 @@
 
 import * as React from 'react'
 import { create } from 'react-test-renderer'
-import { shallow } from 'enzyme'
 import { MemoryRouter, Route } from 'react-router'
 
 import * as reduxMockStore from 'redux-mock-store'
