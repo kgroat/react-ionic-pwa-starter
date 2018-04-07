@@ -72,7 +72,7 @@ To build and deploy to AWS Lambda on linux:
 * `BASE_URL='/stage/' STAGE='stage' npm run serverless:linux` - deploy to specified stage with specified base URL
 
 If you want to use a specific AWS profile to deploy, simply specify the `AWS_PROFILE` environment variable:
-* `AWS_PROFILE=personal npm run serverless:dev`
+* `AWS_PROFILE='myProfile' npm run serverless:dev`
 
 
 ## Project Secrets
