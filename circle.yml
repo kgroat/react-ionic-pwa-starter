@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Build Application Code
           command: |
-            npm run serverless:build
+            BASE_URL='/dev/' npm run serverless:build
       - run:
           name: Clean npm Dependencies for prod
           command: |
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            BASE_URL='/dev/' npx serverless deploy --stage=dev
+            npx serverless deploy --stage=dev
 
 workflows:
   version: 2
