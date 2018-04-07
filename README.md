@@ -102,7 +102,7 @@ In order to run, build, or deploy the application, you'll need to supply some se
 * `TRANSPORT_AUTH` - (Required) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
   - In development mode, [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`
 * `BASE_URL` - (Optional) The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
-  - If not provided, defaults to `/`.  This works fine for local development.  It may also work production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+  - If not provided, defaults to `/`.  This works fine for local development; it may also work for production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) with a base path of `/`.  If you use a base path other than `/`, specify that path as your `BASE_URL` variable during deployments instead.
 
 
 ## Generators
