@@ -1,6 +1,10 @@
 
 # React Ionic PWA Starter
 
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+[![CircleCI](https://circleci.com/gh/kgroat/react-ionic-pwa-starter.svg?style=svg)](https://circleci.com/gh/kgroat/workflows/react-ionic-pwa-starter)
+[![Coverage Status](https://coveralls.io/repos/github/kgroat/react-ionic-pwa-starter/badge.svg?branch=master)](https://coveralls.io/github/kgroat/react-ionic-pwa-starter)
+
 ## Prerequisites
 
 * NodeJS LTS [Download](https://nodejs.org/en/)
