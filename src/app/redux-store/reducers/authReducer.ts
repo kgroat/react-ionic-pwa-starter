@@ -2,11 +2,7 @@
 import { SetTokenAction, type as SET_TOKEN } from 'actions/setToken'
 
 import { ActorMap, buildReducer } from '../actorMap'
-import { AuthState } from 'state/AuthState'
-
-export const INITIAL_STATE: AuthState = {
-  token: null,
-}
+import { AuthState, DEFAULT_STATE } from 'state/AuthState'
 
 const actors: ActorMap<AuthState> = {
   [SET_TOKEN]: (prev, { token }: SetTokenAction) => ({
@@ -15,4 +11,4 @@ const actors: ActorMap<AuthState> = {
   }),
 }
 
-export default buildReducer(INITIAL_STATE, actors)
+export default buildReducer(DEFAULT_STATE, actors)

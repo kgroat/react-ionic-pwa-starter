@@ -2,11 +2,7 @@
 import { SetUsersListUsersAction, type as SET_USERS_LIST_USERS } from 'actions/setUsersListUsers'
 
 import { ActorMap, buildReducer } from '../../actorMap'
-import { UiState } from 'state/UiState'
-
-export const INITIAL_STATE: UiState['usersList'] = {
-  usernames: [],
-}
+import { UiState, DEFAULT_STATE } from 'state/UiState'
 
 const actors: ActorMap<UiState['usersList']> = {
   [SET_USERS_LIST_USERS]: (prev, { usernames }: SetUsersListUsersAction) => ({
@@ -15,4 +11,4 @@ const actors: ActorMap<UiState['usersList']> = {
   }),
 }
 
-export default buildReducer(INITIAL_STATE, actors)
+export default buildReducer(DEFAULT_STATE.usersList, actors)

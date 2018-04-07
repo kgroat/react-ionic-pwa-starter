@@ -1,6 +1,5 @@
 
 import { User } from 'models/user'
-export { UpdateRequest } from 'services/userService'
 
 export interface LoginRequest {
   username: string
@@ -29,4 +28,9 @@ export interface TokenResponse {
 
 export interface VerificationResponse {
   success: boolean
+}
+
+export interface UpdateRequest {
+  firstName: string
+  lastName: string
 }

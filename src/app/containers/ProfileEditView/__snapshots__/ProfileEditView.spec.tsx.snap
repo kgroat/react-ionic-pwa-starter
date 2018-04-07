@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileEditView /> snapshots should render loading when the user is undefined 1`] = `null`;
+
+exports[`<ProfileEditView /> snapshots should render the details of the user 1`] = `null`;

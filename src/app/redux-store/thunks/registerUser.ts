@@ -13,4 +13,5 @@ export default (req: RegisterRequest): ThunkAction<any, AppState, Promise<void>>
   async (dispatch) => {
     const { token } = await POST<RegisterResponse>(endpoint, req)
     dispatch(setToken({ token }))
+    return token
   }

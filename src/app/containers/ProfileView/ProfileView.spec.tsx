@@ -14,6 +14,8 @@ import ConnectedProfileView, { ProfileView, RouteParams } from './ProfileView'
 
 const mockStore = createMockStore<AppState>([thunk])
 jest.mock('containers/ContentView')
+jest.mock('thunks/fetchUser')
+jest.mock('redux-store/store')
 
 const user: User = {
   username: 'testuser',

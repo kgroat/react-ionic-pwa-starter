@@ -13,7 +13,10 @@ import { AppState, DEFAULT_STATE } from 'state'
 import ConnectedProfileEditView, { ProfileEditView } from './ProfileEditView'
 
 const mockStore = createMockStore<AppState>([thunk])
-jest.mock('containers/ContentView')
+jest.mock('containers/ContentView/ContentView')
+jest.mock('thunks/fetchUser')
+jest.mock('thunks/updateUser')
+jest.mock('redux-store/store')
 
 const user: User = {
   username: 'testuser',

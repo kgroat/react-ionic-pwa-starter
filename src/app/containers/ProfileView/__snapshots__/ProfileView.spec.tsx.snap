@@ -1,23 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Connect /> snapshots should render correctly 1`] = `
-<View>
-  <ion-header>
-    <ion-toolbar
-      color="primary"
-    >
-      <ion-menu-button />
-      <ion-title>
-        Profile
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content
-    class="refreshContent"
+exports[`<ProfileView /> snapshots should render loading when the user is undefined 1`] = `
+<ContentView
+  backButton={false}
+  className="profileView"
+  loading={true}
+  refresh={[Function]}
+  title="Profile"
+>
+  <ion-fab
+    horizontal="right"
+    vertical="bottom"
   >
-    <ion-scroll
-      class="padded"
-    />
-  </ion-content>
-</View>
+    <ion-fab-button
+      onClick={[Function]}
+    >
+      <ion-icon
+        name="options"
+      />
+    </ion-fab-button>
+  </ion-fab>
+</ContentView>
+`;
+
+exports[`<ProfileView /> snapshots should render the details of the logged in user 1`] = `
+<ContentView
+  backButton={false}
+  className="profileView"
+  loading={false}
+  refresh={[Function]}
+  title="Profile"
+>
+  <ion-card>
+    <ion-card-header>
+      testuser
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            Email
+          </ion-label>
+          <h2>
+            test@user.com
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            First Name
+          </ion-label>
+          <h2>
+            Test
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            Last Name
+          </ion-label>
+          <h2>
+            McUser
+          </h2>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab
+    horizontal="right"
+    vertical="bottom"
+  >
+    <ion-fab-button
+      onClick={[Function]}
+    >
+      <ion-icon
+        name="options"
+      />
+    </ion-fab-button>
+  </ion-fab>
+</ContentView>
+`;
+
+exports[`<ProfileView /> snapshots should render the details of the user 1`] = `
+<ContentView
+  backButton={true}
+  className="profileView"
+  loading={false}
+  refresh={[Function]}
+  title="Profile"
+>
+  <ion-card>
+    <ion-card-header>
+      testuser
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            Email
+          </ion-label>
+          <h2>
+            test@user.com
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            First Name
+          </ion-label>
+          <h2>
+            Test
+          </h2>
+        </ion-item>
+        <ion-item>
+          <ion-label
+            color="tertiary"
+          >
+            Last Name
+          </ion-label>
+          <h2>
+            McUser
+          </h2>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ContentView>
 `;

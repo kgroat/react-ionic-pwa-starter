@@ -44,7 +44,7 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      tsConfigFile: './.config/tsconfig.test.json',
+      tsConfigFile: './.config/tsconfig.json',
     },
     '__DEV__': true,
   },
