@@ -39,7 +39,6 @@
   ],
   "exclude": [
     "../src/seviceWorker",
-    "../node_modules",
-    "../**/*.spec.*"
+    "../node_modules"
   ]
 }

@@ -36,7 +36,7 @@ interface State {
   redirect: boolean
 }
 
-export class ProfileView extends React.Component<Props, State> {
+export class ProfileEditView extends React.Component<Props, State> {
   state: State = {
     firstName: this.props.user && this.props.user.firstName || '',
     lastName: this.props.user && this.props.user.lastName || '',
@@ -206,6 +206,6 @@ const withRedux = connect<StateProps, DispatchProps, OwnProps, AppState>(
   }),
 )
 
-const ConnectedProfileView = withRedux(ProfileView)
+const ConnectedProfileEditView = withRedux(ProfileEditView)
 
-export default ConnectedProfileView
+export default ConnectedProfileEditView

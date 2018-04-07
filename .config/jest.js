@@ -23,12 +23,6 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|svg|ttf|woff|woff2)$': '<rootDir>/__mocks__/emptyMock.js',
     '\\.(s?css)$': 'identity-obj-proxy',
 
-    // Root directories
-    '^app(.*)$': '<rootDir>/src/app$1',
-    '^models(.*)$': '<rootDir>/src/models$1',
-    '^server(.*)$': '<rootDir>/src/server$1',
-    '^shared(.*)$': '<rootDir>/src/shared$1',
-
     // App locations
     '^components(.*)$': '<rootDir>/src/app/components$1',
     '^containers(.*)$': '<rootDir>/src/app/containers$1',
@@ -41,11 +35,18 @@ module.exports = {
     // Server locations
     '^api(.*)$': '<rootDir>/src/server/api$1',
     '^services(.*)$': '<rootDir>/src/server/services$1',
+
+    // Root directories
+    '^app(.*)$': '<rootDir>/src/app$1',
+    '^models(.*)$': '<rootDir>/src/models$1',
+    '^server(.*)$': '<rootDir>/src/server$1',
+    '^shared(.*)$': '<rootDir>/src/shared$1',
   },
   globals: {
     'ts-jest': {
       tsConfigFile: './.config/tsconfig.test.json',
     },
+    '__DEV__': true,
   },
   collectCoverage: true,
   collectCoverageFrom: [

@@ -18,11 +18,11 @@ provider:
   profile: ${self:custom.profiles.${self:provider.stage}}
   environment:
     NODE_ENV: "${self:custom.secrets.NODE_ENV, 'production'}"
-    AUTH_SECRET: "${self:custom.secrets.AUTH_SECRET}"
-    MONGO_URL: "${self:custom.secrets.MONGO_URL}"
-    FCM_KEY: "${self:custom.secrets.FCM_KEY}"
-    PASSWORD_SALT_ITERATIONS: "${self:custom.secrets.PASSWORD_SALT_ITERATIONS}"
-    TRANSPORT_AUTH: "${self:custom.secrets.TRANSPORT_AUTH}"
+    AUTH_SECRET: "${self:custom.secrets.AUTH_SECRET, env:AUTH_SECRET}"
+    MONGO_URL: "${self:custom.secrets.MONGO_URL, env:MONGO_URL}"
+    FCM_KEY: "${self:custom.secrets.FCM_KEY, env:FCM_KEY}"
+    PASSWORD_SALT_ITERATIONS: "${self:custom.secrets.PASSWORD_SALT_ITERATIONS, 14}"
+    TRANSPORT_AUTH: "${self:custom.secrets.TRANSPORT_AUTH, env:TRANSPORT_AUTH}"
 
 custom:
   secrets: ${file(./secrets.yml):${self:provider.stage}}

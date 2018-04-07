@@ -120,6 +120,7 @@
     "identity-obj-proxy": "^3.0.0",
     "inline-css-webpack-loader": "^1.0.3",
     "jest": "^22.4.3",
+    "jest-junit-reporter": "^1.1.0",
     "json-loader": "^0.5.7",
     "node-hot-loader": "^1.6.0",
     "node-sass": "^4.8.3",

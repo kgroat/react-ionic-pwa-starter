@@ -1,0 +1,86 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache: &testNpmKey
+          key: v1-test-npm-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+            yarn global add npm@^5.8
+            npm install
+      - save_cache:
+          <<: *testNpmKey
+          paths:
+            - node_modules
+            - ~/.npm
+      - run:
+          name: Lint code
+          command: |
+            npm run test
+      - run:
+          name: Run tests
+          command: |
+            npx jest --ci --testResultsProcessor="./node_modules/jest-junit-reporter"
+      - store_artifacts:
+          path: coverage/
+      - store_test_results:
+          path: coverage/
+  build_and_deploy:
+    docker:
+      - image: circleci/node:8.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache: &buildAllNpmKey
+          key: v1-build-all-npm-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+            yarn global add npm@^5.8
+            npm install
+      - save_cache:
+          <<: *buildAllNpmKey
+          paths:
+            - node_modules
+            - ~/.npm
+      - run:
+          name: Build Application Code
+          command: |
+            npm run serverless:build
+      - run:
+          name: Clean npm Dependencies for prod
+          command: |
+            rm -rf node_modules
+      - restore_cache: &buildProdNpmKey
+          key: v1-build-prod-npm-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Prod Dependencies
+          command: |
+            npm install --production
+      - save_cache:
+          <<: *buildProdNpmKey
+          paths:
+            - node_modules
+            - ~/.npm
+      - run:
+          name: Deploy
+          command: |
+            BASE_URL='/dev/' npx serverless deploy --stage=dev
+
+workflows:
+  version: 2
+  test_build_deploy:
+    jobs:
+      - test
+      - build_and_deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+
