@@ -1,5 +1,5 @@
 
-const user = {
+const updateUser = {
   username: 'testuser',
   firstName: 'Test',
   lastName: 'McUser',
@@ -8,4 +8,4 @@ const user = {
 }
 
 exports.default = (update) => () =>
-Promise.resolve(Object.assign({}, user, update))
+Promise.resolve(Object.assign({}, updateUser, update))

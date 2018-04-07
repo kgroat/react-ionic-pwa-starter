@@ -25,7 +25,10 @@ jobs:
       - run:
           name: Run tests
           command: |
-            npm run test:unit -- --ci --testResultsProcessor="./node_modules/jest-junit-reporter"
+            TEST_REPORT_PATH=coverage \
+              npm run test:unit -- \
+              --ci \
+              --testResultsProcessor="./node_modules/jest-junit-reporter"
       - store_artifacts:
           path: coverage/
       - store_test_results:

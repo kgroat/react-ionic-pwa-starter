@@ -1,5 +1,5 @@
 
-const user = {
+const fetchUser = {
   username: 'testuser',
   firstName: 'Test',
   lastName: 'McUser',
@@ -8,6 +8,6 @@ const user = {
 }
 
 exports.default = (username) => () =>
-Promise.resolve(Object.assign({}, user, {
-  username: username || user.username,
+Promise.resolve(Object.assign({}, fetchUser, {
+  username: username || fetchUser.username,
 }))
