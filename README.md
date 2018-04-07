@@ -8,11 +8,12 @@
 
 ## Prerequisites
 
-* NodeJS LTS [Download](https://nodejs.org/en/)
-* Docker [Download](https://www.docker.com/community-edition) (Only required for serverless deployment on MacOS and Windows)
+* NodeJS LTS ([Download](https://nodejs.org/en/) - Required)
+* Docker ([Download](https://www.docker.com/community-edition) - Only required for serverless deployment on MacOS and Windows)
   - If you are on MacOS / Windows, ensure that your development directory is mountable by docker
   - See the documentation for [MacOS](https://docs.docker.com/docker-for-mac/#file-sharing) or [Windows](https://docs.docker.com/docker-for-windows/#shared-drives)
-
+* MongoDB Community Server ([Download](https://www.mongodb.com/download-center/#community)  - Optional)
+  - You can use a service such as [mLab](https://mlab.com/) instead.  See `MONGO_URL` under the [Project Secrets -> Secrets include](https://github.com/kgroat/react-ionic-pwa-starter#secrets-include) section for more information.
 
 ## Using this repository as a starter
 
@@ -27,7 +28,7 @@ From there, you can add your own remote and push the code:
 
 Before you do, you will want to update project details:
 * In `package.json`, you'll want to update:
-  * `name` - a unique identifier (should be [kebab-case](https://www.google.com/search?q=kebab+case))
+  * `name` - a unique identifier (should be [kebab-case](http://wiki.c2.com/?KebabCase))
   * `appName` - The title for you application (Used in the `<title />` tag of your PWA)
   * `pushEmail` - The email used for registering push notifications, in a `mailto:` url
   * `noreplyEmail` - The default email used when sending through [`nodemailer`](https://nodemailer.com/)
@@ -65,7 +66,7 @@ To test a production bundle locally:
 To build and deploy to AWS Lambda on MacOS or Windows (Docker required):
 * `npm run serverless:dev` - deploys to dev stage
 * `npm run serverless:prod` - deploys to prod stage
-* `BASE_URL='/stage/' STAGE='stage' npm run serverless:docker` - deploy to specified stage with specified base URL
+* `BASE_URL='/stage/' STAGE='stage' npm run serverless:docker` - deploy to specified stage with specified [base URL](https://www.w3schools.com/tags/tag_base.asp)
 
 To build and deploy to AWS Lambda on linux:
 * `BASE_URL='/stage/' STAGE='stage' npm run serverless:linux` - deploy to specified stage with specified base URL
@@ -74,11 +75,13 @@ If you want to use a specific AWS profile to deploy, simply specify the `AWS_PRO
 * `AWS_PROFILE=personal npm run serverless:dev`
 
 
-## Project secrets
+## Project Secrets
 
-In order to run, build, or deploy the application, you'll need to supply some secrets.  __*NOTE*__: These secrets __SHOULD NOT__ be committed into your repository.
+In order to run, build, or deploy the application, you'll need to supply some secrets.
 
-The secrets will live in a few different places:
+### __NOTE__: These secrets __SHOULD NOT__ be committed into your repository.
+
+#### The secrets will live in a few different places:
 * A `.env` file at the root of the project for local development (used when running `npm run start:dev` or `npm run build`)
   - Use the [`dotenv` format](https://www.npmjs.com/package/dotenv#usage)
 * A `secrets.yml` file at the root of the project (used when deploying using `npm run serverless:*` commands)
@@ -86,17 +89,19 @@ The secrets will live in a few different places:
 * Your CircleCI [environment variables](https://circleci.com/docs/2.0/env-vars/) (if you use CircleCI)
 
 
-Secrets include:
-* `AUTH_SECRET` - the cleartext secret used for encrypting and decrypting [JWT](https://jwt.io/) tokens, used for user authentication
-* `FCM_KEY` - Used for registering push notification clients, if using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
-* `MONGO_URL` - The URL (including database name) of the `mongod` instance you want to connect to
+#### Secrets include:
+* `AUTH_SECRET` - (Required) The secret used for encrypting and decrypting [JWT](https://jwt.io/) tokens, used for user authentication
+  - It is reccommended to use a long (~128 characters), randomly-generated string.  You can use a random generator such as [random.org](https://www.random.org/strings/?num=5&len=20&digits=on&upperalpha=on&loweralpha=on&unique=off&format=html&rnd=new) and concatenate the results together.
+* `FCM_KEY` - (Optional) Used for registering push notification clients, if using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
+* `MONGO_URL` - (Required for production) The URL (including database name) of the `mongod` instance you want to connect to
   - Leave this out of your `.env` file if you just want to connect to a [locally-running `mongod` instance](https://docs.mongodb.com/manual/reference/program/mongod/index.html)
+  - You can use a service such as [mLab](https://mlab.com/) to host a database, if you want a remote database instead
 * `NODE_ENV` - if this is anything except `production`, development mode is enabled -- you can use the `__DEV__` variable to make certain portions of code only run while in development mode.
 * `PASSWORD_SALT_ITERATIONS` - The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
   - If not provided, a default of 10 is used.  This is fine for local development, but [may not be sufficient for production environments](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993)
 * `TRANSPORT_AUTH` - A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
   - In development mode, [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`
-* `BASE_URL` - The base url for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
+* `BASE_URL` - The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
   - If not provided, defaults to `/`.  This works fine for local development.  It may also work production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 
 

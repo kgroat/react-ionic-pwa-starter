@@ -9,7 +9,9 @@ const { pushEmail } = require('../../../package.json')
 export const { publicKey, privateKey } = wp.generateVAPIDKeys()
 
 const configWebPush = singletonPromise(async () => {
-  wp.setGCMAPIKey(process.env.FCM_KEY)
+  if (process.env.FCM_KEY) {
+    wp.setGCMAPIKey(process.env.FCM_KEY)
+  }
 
   wp.setVapidDetails(
     `mailto:${pushEmail}`,
