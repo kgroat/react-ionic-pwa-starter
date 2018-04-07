@@ -20,8 +20,8 @@ const VERIFICATION_KEY = 'verificationKey'
 router.get('/', catcher(async (req, res) => {
   const { take: takeStr, skip: skipStr, sortBy } = req.query
 
-  const take = takeStr && parseInt(takeStr, 10) || DEFAULT_COUNT
-  const skip = skipStr && parseInt(skipStr, 10)
+  const take = takeStr ? parseInt(takeStr, 10) : DEFAULT_COUNT
+  const skip = skipStr ? parseInt(skipStr, 10) : 0
   const users = await userService.getMany(Math.min(take, MAX_COUNT), skip, sortBy)
 
   res.json(users)
@@ -49,8 +49,8 @@ router.post(`/verify/resend`, requireAuth, catcher(async (req, res) => {
 }))
 
 router.get(`/verify/:${USERNAME}/:${VERIFICATION_KEY}`, catcher(async (req, res) => {
-  const username = req.param('username')
-  const verificationKey = req.param('verificationKey')
+  const username = req.params[USERNAME]
+  const verificationKey = req.params[VERIFICATION_KEY]
 
   const success = await userService.verifyUser(username, verificationKey)
 
@@ -64,7 +64,7 @@ router.get('/me', requireAuth, catcher(async (req, res) => {
 }))
 
 router.get(`/:${USERNAME}`, catcher(async (req, res) => {
-  const username = req.param(USERNAME)
+  const username = req.params[USERNAME]
   const user = await userService.getByUsername(username)
   res.json(user)
 }))
