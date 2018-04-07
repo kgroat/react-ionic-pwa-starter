@@ -8,7 +8,6 @@ const createMockStore: typeof reduxMockStore.default = reduxMockStore as any
 import thunk from 'redux-thunk'
 import ConnectedUsersListView, { UsersListView } from './UsersListView'
 
-import { User } from 'models/user'
 import { AppState, DEFAULT_STATE } from 'state'
 
 const mockStore = createMockStore<AppState>([thunk])
