@@ -21,7 +21,7 @@ provider:
     AUTH_SECRET: "${self:custom.secrets.AUTH_SECRET, env:AUTH_SECRET}"
     MONGO_URL: "${self:custom.secrets.MONGO_URL, env:MONGO_URL}"
     FCM_KEY: "${self:custom.secrets.FCM_KEY, env:FCM_KEY}"
-    PASSWORD_SALT_ITERATIONS: "${self:custom.secrets.PASSWORD_SALT_ITERATIONS, 14}"
+    PASSWORD_SALT_ITERATIONS: "${self:custom.secrets.PASSWORD_SALT_ITERATIONS, '14'}"
     TRANSPORT_AUTH: "${self:custom.secrets.TRANSPORT_AUTH, env:TRANSPORT_AUTH}"
 
 custom:
