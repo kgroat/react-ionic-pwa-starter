@@ -96,12 +96,12 @@ In order to run, build, or deploy the application, you'll need to supply some se
 * `MONGO_URL` - (Required for production) The URL (including database name) of the `mongod` instance you want to connect to
   - Leave this out of your `.env` file if you just want to connect to a [locally-running `mongod` instance](https://docs.mongodb.com/manual/reference/program/mongod/index.html)
   - You can use a service such as [mLab](https://mlab.com/) to host a database, if you want a remote database instead
-* `NODE_ENV` - if this is anything except `production`, development mode is enabled -- you can use the `__DEV__` variable to make certain portions of code only run while in development mode.
-* `PASSWORD_SALT_ITERATIONS` - The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
+* `NODE_ENV` - (Optional) If this is anything except `production`, development mode is enabled -- you can use the `__DEV__` variable to make certain portions of code only run while in development mode.
+* `PASSWORD_SALT_ITERATIONS` - (Reccommended) The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
   - If not provided, a default of 10 is used.  This is fine for local development, but [may not be sufficient for production environments](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993)
-* `TRANSPORT_AUTH` - A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
+* `TRANSPORT_AUTH` - (Required) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
   - In development mode, [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`
-* `BASE_URL` - The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
+* `BASE_URL` - (Optional) The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
   - If not provided, defaults to `/`.  This works fine for local development.  It may also work production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 
 
