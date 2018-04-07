@@ -27,9 +27,6 @@ provider:
 custom:
   secrets: ${file(./secrets.yml):${self:provider.stage}}
   defaultStage: dev
-  profiles:
-    dev: personal
-    prod: personal
   apigwBinary:
     types:
       - 'image/png'
