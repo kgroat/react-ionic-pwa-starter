@@ -15,7 +15,6 @@ provider:
   runtime: nodejs8.10
   region: us-east-1
   stage: ${opt:stage, self:custom.defaultStage}
-  profile: ${self:custom.profiles.${self:provider.stage}}
   environment:
     NODE_ENV: "${self:custom.secrets.NODE_ENV, 'production'}"
     AUTH_SECRET: "${self:custom.secrets.AUTH_SECRET, env:AUTH_SECRET}"
