@@ -13,7 +13,7 @@
   - If you are on MacOS / Windows, ensure that your development directory is mountable by docker
   - See the documentation for [MacOS](https://docs.docker.com/docker-for-mac/#file-sharing) or [Windows](https://docs.docker.com/docker-for-windows/#shared-drives)
 * MongoDB Community Server ([Download](https://www.mongodb.com/download-center/#community)  - Optional)
-  - You can use a service such as [mLab](https://mlab.com/) instead.  See `MONGO_URL` under the [Project Secrets -> Secrets include](https://github.com/kgroat/react-ionic-pwa-starter#secrets-include) section for more information.
+  - You can use a service such as [mLab](https://mlab.com/) instead.  See `MONGO_URL` under the [Project Secrets -> Secrets include](#secrets-include) section for more information.
 
 ## Using this repository as a starter
 
@@ -44,7 +44,7 @@ Before you do, you will want to update project details:
 * Update your static image assets
   * You can store large asset files in the `assets` directory -- it currently houses the source icon Photoshop document
   * In `src/static`, you'll want to replace `badge.png`, `icon.png`, and `favicon.ico`
-    - NOTE: `favicon.ico` can be generated from a 512x512 `icon.png` in this directory using the `npm run icon` command
+    - __NOTE__: `favicon.ico` can be generated from a 512x512 `icon.png` in this directory using the `npm run icon` command
 * If you're not using CircleCI, you will want to remove the `circle.yml` file at the root of the project
 
 
@@ -53,23 +53,23 @@ Before you do, you will want to update project details:
 To set up:
 * `npm install`
 
-To run locally:
+To run locally in [development mode](#development-mode) with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) (in `app` and `server` code) enabled:
 * `npm run start:dev`
 
 To run the tests:
 * `npm test`
 
-To test a production bundle locally:
-* `npm run build`
-* `npm start`
+To test a static [production mode](#production-mode) bundle locally:
+* `npm run build && npm start`
+
 
 To build and deploy to AWS Lambda on MacOS or Windows (Docker required):
-* `npm run serverless:dev` - deploys to dev stage
-* `npm run serverless:prod` - deploys to prod stage
-* `BASE_URL='/stage/' STAGE='stage' npm run serverless:docker` - deploy to specified stage with specified [base URL](https://www.w3schools.com/tags/tag_base.asp)
+* `npm run serverless:dev` - deploys to dev stage in [development mode](#development-mode)
+* `npm run serverless:prod` - deploys to prod stage in [production mode](#production-mode)
+* `BASE_URL='/stage/' STAGE='stage' NODE_ENV='production' npm run serverless:docker` - deploy to specified stage with specified [base URL](https://www.w3schools.com/tags/tag_base.asp), optionally in [production mode](#production-mode)
 
 To build and deploy to AWS Lambda on linux:
-* `BASE_URL='/stage/' STAGE='stage' npm run serverless:linux` - deploy to specified stage with specified base URL
+* `BASE_URL='/stage/' STAGE='stage' NODE_ENV='production' npm run serverless:linux` - deploy to specified stage with specified [base URL](https://www.w3schools.com/tags/tag_base.asp), optionally in [production mode](#production-mode)
 
 If you want to use a specific AWS profile to deploy, simply specify the `AWS_PROFILE` environment variable:
 * `AWS_PROFILE='myProfile' npm run serverless:dev`
@@ -81,32 +81,48 @@ In order to run, build, or deploy the application, you'll need to supply some se
 
 ### __NOTE__: These secrets __SHOULD NOT__ be committed into your repository.
 
-#### The secrets will live in a few different places:
+#### The secrets / environment variables will live in a few different places:
 * A `.env` file at the root of the project for local development (used when running `npm run start:dev` or `npm run build`)
   - Use the [`dotenv` format](https://www.npmjs.com/package/dotenv#usage)
 * A `secrets.yml` file at the root of the project (used when deploying using `npm run serverless:*` commands)
   - See `example-secrets.yml` for an example of what this file should look like
 * Your CircleCI [environment variables](https://circleci.com/docs/2.0/env-vars/) (if you use CircleCI)
 
-
-#### Secrets include:
+#### Secrets / environment variables include:
 * `AUTH_SECRET` - (Required) The secret used for encrypting and decrypting [JWT](https://jwt.io/) tokens, used for user authentication
-  - It is reccommended to use a long (~128 characters), randomly-generated string.  You can use a random generator such as [random.org](https://www.random.org/strings/?num=5&len=20&digits=on&upperalpha=on&loweralpha=on&unique=off&format=html&rnd=new) and concatenate the results together.
+  - __NOTE__: It is reccommended to use a long (~128 characters), randomly-generated string.  You can use a random generator such as [random.org](https://www.random.org/strings/?num=5&len=20&digits=on&upperalpha=on&loweralpha=on&unique=off&format=html&rnd=new) and concatenate the results together.
 * `FCM_KEY` - (Optional) Used for registering push notification clients, if using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
-* `MONGO_URL` - (Required for production) The URL (including database name) of the `mongod` instance you want to connect to
+* `MONGO_URL` - (Required for production) The URL (including database name) of the `mongod` instance you want to connect to.
   - Leave this out of your `.env` file if you just want to connect to a [locally-running `mongod` instance](https://docs.mongodb.com/manual/reference/program/mongod/index.html)
-  - You can use a service such as [mLab](https://mlab.com/) to host a database, if you want a remote database instead
-* `NODE_ENV` - (Optional) If this is anything except `production`, development mode is enabled -- you can use the `__DEV__` variable to make certain portions of code only run while in development mode.
+  - You can use a service such as [mLab](https://mlab.com/) to host a database, if you want a remote database instead.
+* `NODE_ENV` - (Optional) If this is anything except `production`, [development mode](#development-mode) is enabled.
+  - Defaults to `development`
 * `PASSWORD_SALT_ITERATIONS` - (Reccommended) The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
-  - If not provided, a default of 10 is used.  This is fine for local development, but [may not be sufficient for production environments](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993)
-* `TRANSPORT_AUTH` - (Required) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
-  - In development mode, [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`
+  - If not provided, a default of 10 is used.
+  - __NOTE__: The default is fine for local development, but [may not be sufficient for production environments (reccomended reading)](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993).
+  - [Here is a list of general estimates of cost factors on ](https://www.npmjs.com/package/bcrypt#a-note-on-rounds)
+* `TRANSPORT_AUTH` - (Required for production) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production mode.
+  - In [development mode](#development-mode), [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`.
 * `BASE_URL` - (Optional) The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
-  - If not provided, defaults to `/`.  This works fine for local development; it may also work for production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) with a base path of `/`.  If you use a base path other than `/`, specify that path as your `BASE_URL` variable during deployments instead.
+  - If not provided, defaults to `/`.
+  - This default works fine for local development; it may also work for production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) with a base path of `/`.  If you use a base path other than `/`, specify that path as your `BASE_URL` variable during deployments instead.
+
+#### Development mode
+When `NODE_ENV` is anything besides `production`, development mode is enabled.
+In development mode, the global variable `__DEV__` is set to `true` for all code (`app`, `server`, `serviceWorker`).
+You can use this variable to ensure that portions of your code is only executed in development mode.
+By default, development mode is active during local development using `npm run start:dev` and in the `dev` serverless stage.
+
+__NOTE__: Unit tests are also run in development mode.
+
+#### Production mode
+Production mode is triggered by setting the `NODE_ENV` environment variable to `production`.
+In production mode, the global variable `__DEV__` is set to `false` for all code (`app`, `server`, `serviceWorker`).
+To test production mode locally, run `npm run build && npm run start` to make a static build or `NODE_ENV=production npm run start:dev` for a hot-reloaded build.
 
 
 ## Generators
 
 To create a new React container:
 * `npm run generate:container [ContainerName]`
-  - Note: the word `View` will automatically be appended to your `ContainerName`
+  - __Note__: the word `View` will automatically be appended to your `ContainerName`

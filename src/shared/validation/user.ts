@@ -3,10 +3,16 @@ import * as owasp from 'owasp-password-strength-test'
 
 import { Validator } from './types'
 import { SyncValidatorFunction, makeValidator } from './index'
+export { ValidationResult } from '.'
 
 owasp.config({
   minOptionalTestsToPass: 3,
 })
+
+export function getPasswordRemainingOptional (warningCount: number): number {
+  const leeway = owasp.tests.optional.length - owasp.configs.minOptionalTestsToPass
+  return warningCount - leeway
+}
 
 export const verifyPassword: Validator<string> = (pw) => {
   const { requiredTestErrors, optionalTestErrors, strong } = owasp.test(pw)

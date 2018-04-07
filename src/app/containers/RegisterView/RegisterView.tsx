@@ -9,13 +9,14 @@ import View from 'components/View'
 import ValidationDisplay from 'components/ValidationDisplay'
 
 import {
+  ValidationResult,
   verifyPassword,
   verifyUsername,
   verifyUsernameDoesntExists,
   verifyEmail,
   verifyEmailNotTaken,
+  getPasswordRemainingOptional,
 } from 'app/validation/user'
-import { ValidationResult } from 'shared/validation'
 
 import registerUserThunk from 'thunks/registerUser'
 import { AppState } from 'state'
@@ -198,7 +199,7 @@ class LoginViewBase extends React.Component<Props, State> {
       return null
     }
 
-    const remainingOptional = passwordErrors.warnings.length - 1
+    const remainingOptional = getPasswordRemainingOptional(passwordErrors.warnings.length)
 
     return (
       <ValidationDisplay

@@ -4,7 +4,13 @@ import { User } from 'models/user'
 
 import { GET } from 'redux-store/api'
 
-export { verifyPassword, verifyUsername, verifyEmail } from 'shared/validation/user'
+export {
+  ValidationResult,
+  verifyPassword,
+  verifyUsername,
+  verifyEmail,
+  getPasswordRemainingOptional,
+} from 'shared/validation/user'
 
 export const verifyUsernameDoesntExists = makeAsyncValidator<string>({
   required: [async (username) => {
