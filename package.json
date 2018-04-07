@@ -3,11 +3,11 @@
   "appName": "React Ionic PWA Starter",
   "version": "1.0.0",
   "description": "A starter for using react and ionic v4 as a serverless pwa",
-  "pushEmail": "apps@kevingroat.io",
-  "noreplyEmail": "noreply@kevingroat.io",
+  "pushEmail": "noreply@yourdomain.com",
+  "noreplyEmail": "noreply@yourdomain.com",
   "webpackPort": 3000,
   "serverPort": 3001,
-  "imageRepo": "kgroat/react-ionic-pwa-starter",
+  "private": true,
   "scripts": {
     "test": "run-s test:*",
     "test:lint": "tslint --config .config/tslint.json --project .",
@@ -45,10 +45,6 @@
     "preserverless:deploy:docker": ".config/docker-node.js npm rebuild bcrypt --build-from-source",
     "serverless:deploy:docker": "npm run serverless:deploy",
     "postserverless:deploy:docker": "npm rebuild bcrypt --update-binary"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/kgroat/react-ionic-pwa-starter.git"
   },
   "keywords": [
     "react",

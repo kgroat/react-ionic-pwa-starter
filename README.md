@@ -5,7 +5,6 @@
 [![CircleCI](https://circleci.com/gh/kgroat/react-ionic-pwa-starter.svg?style=svg)](https://circleci.com/gh/kgroat/workflows/react-ionic-pwa-starter)
 [![Coverage Status](https://coveralls.io/repos/github/kgroat/react-ionic-pwa-starter/badge.svg?branch=master)](https://coveralls.io/github/kgroat/react-ionic-pwa-starter)
 
-[See it in production](https://pwa.kevingroat.io/)
 
 ## Prerequisites
 
@@ -13,6 +12,40 @@
 * Docker [Download](https://www.docker.com/community-edition) (Only required for serverless deployment on MacOS and Windows)
   - If you are on MacOS / Windows, ensure that your development directory is mountable by docker
   - See the documentation for [MacOS](https://docs.docker.com/docker-for-mac/#file-sharing) or [Windows](https://docs.docker.com/docker-for-windows/#shared-drives)
+
+
+## Using this repository as a starter
+
+Clone the project using git:
+* `git clone -b master --single-branch https://github.com/kgroat/react-ionic-pwa-starter.git my-pwa` - Clone the `master` branch into a folder named `my-pwa`
+* `rm -rf .git` - Get rid of the git data associated with the original repository
+* `git init` - Re-initialize the directory as a local git repository
+
+From there, you can add your own remote and push the code:
+* `git remote add origin [your-repo-url]` - Add your own repository as the origin remote (`your-repo-url`)
+* `git commit -m 'Initial commit' && git push -u origin master` - Create and push your initial commit
+
+Before you do, you will want to update project details:
+* In `package.json`, you'll want to update:
+  * `name` - a unique identifier (should be [kebab-case](https://www.google.com/search?q=kebab+case))
+  * `appName` - The title for you application (Used in the `<title />` tag of your PWA)
+  * `pushEmail` - The email used for registering push notifications, in a `mailto:` url
+  * `noreplyEmail` - The default email used when sending through [`nodemailer`](https://nodemailer.com/)
+  * `description` - A brief description of your project (Optional)
+* In README.md:
+  * Update the title (should be the same as `appName` from your `package.json`)
+  * Update / remove the badges (Serverless, CircleCI, Coveralls)
+  * Remove this section ("Using this repository as a starter")
+* In `src/static/mainifest.json`, update:
+  * `name` - Should be the same as `appName` from your `package.json`
+  * `short_name` - This is what the app's name will show up as when installed on a device
+  * `gcm_sender_id` - If you're using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
+* Update your static image assets
+  * You can store large asset files in the `assets` directory -- it currently houses the source icon Photoshop document
+  * In `src/static`, you'll want to replace `badge.png`, `icon.png`, and `favicon.ico`
+    - NOTE: `favicon.ico` can be generated from a 512x512 `icon.png` in this directory using the `npm run icon` command
+* If you're not using CircleCI, you will want to remove the `circle.yml` file at the root of the project
+
 
 ## Quickstart
 
@@ -39,6 +72,33 @@ To build and deploy to AWS Lambda on linux:
 
 If you want to use a specific AWS profile to deploy, simply specify the `AWS_PROFILE` environment variable:
 * `AWS_PROFILE=personal npm run serverless:dev`
+
+
+## Project secrets
+
+In order to run, build, or deploy the application, you'll need to supply some secrets.  __*NOTE*__: These secrets __SHOULD NOT__ be committed into your repository.
+
+The secrets will live in a few different places:
+* A `.env` file at the root of the project for local development (used when running `npm run start:dev` or `npm run build`)
+  - Use the [`dotenv` format](https://www.npmjs.com/package/dotenv#usage)
+* A `secrets.yml` file at the root of the project (used when deploying using `npm run serverless:*` commands)
+  - See `example-secrets.yml` for an example of what this file should look like
+* Your CircleCI [environment variables](https://circleci.com/docs/2.0/env-vars/) (if you use CircleCI)
+
+
+Secrets include:
+* `AUTH_SECRET` - the cleartext secret used for encrypting and decrypting [JWT](https://jwt.io/) tokens, used for user authentication
+* `FCM_KEY` - Used for registering push notification clients, if using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
+* `MONGO_URL` - The URL (including database name) of the `mongod` instance you want to connect to
+  - Leave this out of your `.env` file if you just want to connect to a [locally-running `mongod` instance](https://docs.mongodb.com/manual/reference/program/mongod/index.html)
+* `NODE_ENV` - if this is anything except `production`, development mode is enabled -- you can use the `__DEV__` variable to make certain portions of code only run while in development mode.
+* `PASSWORD_SALT_ITERATIONS` - The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
+  - If not provided, a default of 10 is used.  This is fine for local development, but [may not be sufficient for production environments](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993)
+* `TRANSPORT_AUTH` - A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production.
+  - In development mode, [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`
+* `BASE_URL` - The base url for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
+  - If not provided, defaults to `/`.  This works fine for local development.  It may also work production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+
 
 ## Generators
 
