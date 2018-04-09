@@ -7,6 +7,7 @@ const packageJson = require('../package.json')
 const {
   base,
   __DEV__,
+  BASE_URL,
 } = require('./webpack.base')
 
 const srcDir = path.join(__dirname, '../src/serviceWorker')
@@ -25,7 +26,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      '__DEV__': JSON.stringify(__DEV__)
+      '__DEV__': JSON.stringify(__DEV__),
+      'process.env.BASE_URL': JSON.stringify(BASE_URL),
     }),
     // new webpack.optimize.UglifyJsPlugin(),
   ],

@@ -5,9 +5,19 @@ const srcDir = path.join(__dirname, '../src')
 const appDir = path.join(srcDir, 'app')
 const serverDir = path.join(srcDir, 'server')
 
+
+
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const __DEV__ = NODE_ENV !== 'production'
-const BASE_URL = process.env.BASE_URL || '/'
+const BASE_URL = (() => {
+  let uncleanBase = process.env.BASE_URL || '/'
+  if (!/^\//.test(uncleanBase)) {
+    uncleanBase = `/${uncleanBase}`
+  }
+  if (!/\/$/.test(uncleanBase)) {
+    uncleanBase = `${uncleanBase}/`
+  }
+})()
 
 
 const base = {
