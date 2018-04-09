@@ -60,6 +60,10 @@
     "url": "https://github.com/kgroat/react-ionic-pwa-starter/issues"
   },
   "homepage": "https://github.com/kgroat/react-ionic-pwa-starter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kgroat/react-ionic-pwa-starter.git"
+  },
   "dependencies": {
     "async-catcher": "^1.1.0",
     "bcrypt": "^1.0.3",

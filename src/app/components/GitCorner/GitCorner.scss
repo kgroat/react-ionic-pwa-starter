@@ -1,0 +1,61 @@
+
+@import '~@ionic/core/dist/collection/themes/ionic.theme.default.scss';
+
+.gitCorner {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .octoArm {
+    transform-origin: 120px 144px;
+  }
+
+  &:hover .octoArm {
+    animation: octocatWave 560ms ease-in-out;
+  }
+
+  .octoArm, .octoBody {
+    fill:  map-get(map-get($colors, primary), contrast);
+  }
+
+  .backdrop {
+    fill: map-get(map-get($colors, primary), base);
+  }
+
+  @keyframes octocatWave {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    20% {
+      transform: rotate(-25deg);
+    }
+
+    40% {
+      transform: rotate(10deg);
+    }
+
+    60% {
+    transform: rotate(-25deg);
+    }
+
+    80% {
+      transform: rotate(10deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @media (max-width: 500px) {
+    &:hover .octoArm {
+      animation: none;
+    }
+
+    .octoArm {
+      animation: octocatWave 560ms ease-in-out;
+    }
+  }
+
+}

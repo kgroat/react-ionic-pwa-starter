@@ -3,6 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
+import GitCorner from 'components/GitCorner'
 import ContentView from 'containers/ContentView'
 
 import { AppState } from 'state'
@@ -16,6 +17,7 @@ class HomeViewBase extends React.Component<Props> {
   render () {
     return (
       <ContentView title='React Ionic PWA Starter' padding>
+        <GitCorner />
         <p>
           Welcome to the React Ionic PWA Starter.
         </p>
