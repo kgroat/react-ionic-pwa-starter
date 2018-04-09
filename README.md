@@ -13,7 +13,7 @@
   - If you are on MacOS / Windows, ensure that your development directory is mountable by docker
   - See the documentation for [MacOS](https://docs.docker.com/docker-for-mac/#file-sharing) or [Windows](https://docs.docker.com/docker-for-windows/#shared-drives)
 * MongoDB Community Server ([Download](https://www.mongodb.com/download-center/#community)  - Optional)
-  - You can use a service such as [mLab](https://mlab.com/) instead.  See `MONGO_URL` under the [Project Secrets -> Secrets include](#secrets-include) section for more information.
+  - You can use a service such as [mLab](https://mlab.com/) instead.  See the [`MONGO_URL` secret](#secrets-include).
 
 ## Using this repository as a starter
 
@@ -29,10 +29,12 @@ From there, you can add your own remote and push the code:
 Before you do, you will want to update project details:
 * In `package.json`, you'll want to update:
   * `name` - a unique identifier (should be [kebab-case](http://wiki.c2.com/?KebabCase))
+    - This is also used as the database name if no [`MONGO_URL` secret](#secrets-include) is specified
   * `appName` - The title for you application (Used in the `<title />` tag of your PWA)
   * `pushEmail` - The email used for registering push notifications, in a `mailto:` url
   * `noreplyEmail` - The default email used when sending through [`nodemailer`](https://nodemailer.com/)
   * `description` - A brief description of your project (Optional)
+  * `bugs`, `homepage`, `repository` - The issues, readme, and repository url (respectively) to your repo (Reccommended)
 * In README.md:
   * Update the title (should be the same as `appName` from your `package.json`)
   * Update / remove the badges (Serverless, CircleCI, Coveralls)
@@ -62,6 +64,8 @@ To run the tests:
 To test a static [production mode](#production-mode) bundle locally:
 * `npm run build && npm start`
 
+To run in [production mode](#production-mode) with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) (in `app` and `server` code) enabled:
+* `NODE_ENV=production npm run start:dev`
 
 To build and deploy to AWS Lambda on MacOS or Windows (Docker required):
 * `npm run serverless:dev` - deploys to dev stage in [development mode](#development-mode)
@@ -88,24 +92,27 @@ In order to run, build, or deploy the application, you'll need to supply some se
   - See `example-secrets.yml` for an example of what this file should look like
 * Your CircleCI [environment variables](https://circleci.com/docs/2.0/env-vars/) (if you use CircleCI)
 
-#### Secrets / environment variables include:
+#### Secrets include:
 * `AUTH_SECRET` - (Required) The secret used for encrypting and decrypting [JWT](https://jwt.io/) tokens, used for user authentication
   - __NOTE__: It is reccommended to use a long (~128 characters), randomly-generated string.  You can use a random generator such as [random.org](https://www.random.org/strings/?num=5&len=20&digits=on&upperalpha=on&loweralpha=on&unique=off&format=html&rnd=new) and concatenate the results together.
 * `FCM_KEY` - (Optional) Used for registering push notification clients, if using [GCM or FCM keys for push notificaitons](https://firebase.google.com/docs/cloud-messaging/concept-options) (You do NOT need to add firebase to the project for this to work)
 * `MONGO_URL` - (Required for production) The URL (including database name) of the `mongod` instance you want to connect to.
   - Leave this out of your `.env` file if you just want to connect to a [locally-running `mongod` instance](https://docs.mongodb.com/manual/reference/program/mongod/index.html)
   - You can use a service such as [mLab](https://mlab.com/) to host a database, if you want a remote database instead.
-* `NODE_ENV` - (Optional) If this is anything except `production`, [development mode](#development-mode) is enabled.
-  - Defaults to `development`
+* `TRANSPORT_AUTH` - (Required for production) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production mode.
+  - In [development mode](#development-mode), [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`.
+
+
+#### Other environment variables include:
+* `BASE_URL` - (Optional) The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
+  - If not provided, defaults to `/`.
+  - This default works fine for local development; it may also work for production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) with a base path of `/`.  If you use a base path other than `/`, specify that path as your `BASE_URL` variable during deployments instead.
 * `PASSWORD_SALT_ITERATIONS` - (Reccommended) The cost number for [`bcrypt` key expansion](https://en.wikipedia.org/wiki/Bcrypt#Description) used when hashing and checking passwords.
   - If not provided, a default of 10 is used.
   - __NOTE__: The default is fine for local development, but [may not be sufficient for production environments (reccomended reading)](https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pkbdf2-sha256/3993#3993).
   - [Here is a list of general estimates of cost factors on ](https://www.npmjs.com/package/bcrypt#a-note-on-rounds)
-* `TRANSPORT_AUTH` - (Required for production) A JSON string used as the authentication for [`nodemailer`](https://nodemailer.com/) in production mode.
-  - In [development mode](#development-mode), [Etherial Email](https://ethereal.email/) is used, and the resulting URLS logged to `STDOUT`.
-* `BASE_URL` - (Optional) The [base URL](https://www.w3schools.com/tags/tag_base.asp) for the application.  `serverless` uses [AWS API Gateway](https://aws.amazon.com/api-gateway/), which sets the base URL to be the same as the stage name.
-  - If not provided, defaults to `/`.
-  - This default works fine for local development; it may also work for production, if you [use a custom domain name](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) with a base path of `/`.  If you use a base path other than `/`, specify that path as your `BASE_URL` variable during deployments instead.
+* `NODE_ENV` - (Optional) If this is anything except `production`, [development mode](#development-mode) is enabled.
+  - Defaults to `development`
 
 #### Development mode
 When `NODE_ENV` is anything besides `production`, development mode is enabled.
