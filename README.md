@@ -78,6 +78,9 @@ To build and deploy to AWS Lambda on linux:
 If you want to use a specific AWS profile to deploy, simply specify the `AWS_PROFILE` environment variable:
 * `AWS_PROFILE='myProfile' npm run serverless:dev`
 
+To run a production build using `serverless offline`, run:
+* `npm run serverless:offline`
+
 
 ## Project Secrets
 
@@ -118,7 +121,7 @@ In order to run, build, or deploy the application, you'll need to supply some se
 When `NODE_ENV` is anything besides `production`, development mode is enabled.
 In development mode, the global variable `__DEV__` is set to `true` for all code (`app`, `server`, `serviceWorker`).
 You can use this variable to ensure that portions of your code is only executed in development mode.
-By default, development mode is active during local development using `npm run start:dev` and in the `dev` serverless stage.
+By default, development mode is active during local development using `npm run start:dev`.
 
 __NOTE__: Unit tests are also run in development mode.
 
