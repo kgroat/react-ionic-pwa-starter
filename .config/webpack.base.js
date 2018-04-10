@@ -17,6 +17,7 @@ const BASE_URL = (() => {
   if (!/\/$/.test(uncleanBase)) {
     uncleanBase = `${uncleanBase}/`
   }
+  return uncleanBase
 })()
 
 
