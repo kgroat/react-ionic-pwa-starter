@@ -41,10 +41,10 @@
     "serverless:build:server": "SERVERLESS=1 npm run build:server",
     "preserverless:deploy": "rm -rf node_modules && npm i --production",
     "serverless:deploy": "serverless deploy --stage=${STAGE:-dev}",
-    "postserverless:deploy": "pm i",
-    "preserverless:deploy:docker": ".config/docker-node.js npm rebuild bcrypt --build-from-source",
-    "serverless:deploy:docker": "npm run serverless:deploy",
-    "postserverless:deploy:docker": "npm rebuild bcrypt --update-binary"
+    "postserverless:deploy": "npm i",
+    "preserverless:deploy:docker": "npm run preserverless:deploy && .config/docker-node.js npm rebuild bcrypt --build-from-source",
+    "serverless:deploy:docker": "serverless deploy --stage=${STAGE:-dev}",
+    "postserverless:deploy:docker": "npm rebuild bcrypt --update-binary && npm i"
   },
   "keywords": [
     "react",
