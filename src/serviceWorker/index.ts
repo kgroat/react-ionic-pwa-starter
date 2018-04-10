@@ -38,6 +38,7 @@ workbox.precaching.precacheAndRoute([
   `${baseUrl}index.js`,
   `${baseUrl}ionic.js`,
   `${baseUrl}ionic.js`,
+  `${baseUrl}index.css`,
 ])
 
 workbox.routing.registerRoute(

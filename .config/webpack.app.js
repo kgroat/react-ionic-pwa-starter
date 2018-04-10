@@ -24,7 +24,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
+    filename: "[name].css",
     disable: __DEV__
 })
 
