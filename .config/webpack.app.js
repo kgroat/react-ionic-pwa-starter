@@ -21,6 +21,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const StringReplacePlugin = require('string-replace-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css",
@@ -116,6 +117,10 @@ module.exports = {
       'process.env.BASE_URL': JSON.stringify(BASE_URL),
     }),
     extractSass,
-    // new webpack.optimize.UglifyJsPlugin()
+    new UglifyJsWebpackPlugin({
+      uglifyOptions: {
+        ecma: 6,
+      }
+    }),
   ],
 }

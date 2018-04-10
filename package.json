@@ -47,6 +47,7 @@
     "serverless:deploy:docker": "serverless deploy --stage=${STAGE:-dev}",
     "postserverless:deploy:docker": "npm rebuild bcrypt --update-binary && npm i"
   },
+  "sideEffects": false,
   "keywords": [
     "react",
     "ionic",
@@ -153,6 +154,7 @@
     "tslint-config-standard": "^7.0.0",
     "typed-css-modules": "^0.3.1",
     "typescript": "^2.8.1",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "url-loader": "^1.0.1",
     "uuid": "^3.2.1",
     "webpack": "^3.11.0",

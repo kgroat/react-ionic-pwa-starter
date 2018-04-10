@@ -1,5 +1,6 @@
 
 const webpack = require('webpack')
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 
 const packageJson = require('../package.json')
@@ -29,6 +30,10 @@ module.exports = {
       '__DEV__': JSON.stringify(__DEV__),
       'process.env.BASE_URL': JSON.stringify(BASE_URL),
     }),
-    // new webpack.optimize.UglifyJsPlugin(),
+    new UglifyJsWebpackPlugin({
+      uglifyOptions: {
+        ecma: 6,
+      }
+    }),
   ],
 }

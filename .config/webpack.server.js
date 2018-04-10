@@ -1,5 +1,6 @@
 
 const webpack = require('webpack')
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 
 const { dependencies } = require('../package.json')
@@ -86,6 +87,11 @@ module.exports = Object.assign({}, base, {
   plugins: [
     new webpack.DefinePlugin({
       '__DEV__': JSON.stringify(__DEV__)
+    }),
+    new UglifyJsWebpackPlugin({
+      uglifyOptions: {
+        ecma: 6,
+      }
     }),
   ]
 })
