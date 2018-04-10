@@ -17,7 +17,7 @@ class HomeViewBase extends React.Component<Props> {
   render () {
     return (
       <ContentView title='React Ionic PWA Starter' padding>
-        <GitCorner />
+        {/* <GitCorner /> */}
         <p>
           Welcome to the React Ionic PWA Starter.
         </p>
