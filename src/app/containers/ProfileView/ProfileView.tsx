@@ -8,6 +8,7 @@ import ContentView from 'containers/ContentView'
 
 import { User } from 'models/user'
 import { NOT_FOUND, HttpError } from 'shared/statusCodes'
+import { onlineStatus, Subscription } from 'app/helpers/onlineHelper'
 
 import fetchUserThunk from 'thunks/fetchUser'
 import { AppState } from 'state'
@@ -27,17 +28,26 @@ type Props = OwnProps & StateProps & DispatchProps
 interface State {
   notFound: boolean
   error: string
+  online: boolean
 }
 
 export class ProfileView extends React.Component<Props, State> {
   state: State = {
     notFound: false,
     error: '',
+    online: navigator.onLine,
   }
+
+  onlineSubscription: Subscription
 
   componentDidMount () {
     this.fetch()
       .catch(() => null)
+    this.onlineSubscription = onlineStatus.subscribe(({ online }) => this.setState({ online }))
+  }
+
+  componentWillUnmount () {
+    this.onlineSubscription.unsubscribe()
   }
 
   render () {
@@ -120,8 +130,8 @@ export class ProfileView extends React.Component<Props, State> {
     }
 
     return (
-      <ion-fab horizontal='right' vertical='bottom'>
-        <ion-fab-button onClick={() => goTo('/editProfile')}>
+      <ion-fab horizontal='end' vertical='bottom'>
+        <ion-fab-button disabled={!this.state.online} onClick={() => this.state.online && goTo('/editProfile')}>
           <ion-icon name='options' />
         </ion-fab-button>
       </ion-fab>

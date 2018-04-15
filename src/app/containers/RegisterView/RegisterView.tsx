@@ -93,22 +93,22 @@ class LoginViewBase extends React.Component<Props, State> {
           <ion-list>
             {this.renderStatus()}
             <ion-item>
-              <ion-label stacked color={!emailErrors || emailErrors.passes ? 'primary' : 'danger'}>Email</ion-label>
+              <ion-label position='stacked' color={!emailErrors || emailErrors.passes ? 'primary' : 'danger'}>Email</ion-label>
               <IonInput autofocus placeholder='Email' debounce={DEBOUNCE_MS} value={email} onIonInput={this.onEmailChange} />
               {this.renderEmailErrors()}
             </ion-item>
             <ion-item>
-              <ion-label stacked color={!usernameErrors || usernameErrors.passes ? 'primary' : 'danger'}>Username</ion-label>
+              <ion-label position='stacked' color={!usernameErrors || usernameErrors.passes ? 'primary' : 'danger'}>Username</ion-label>
               <IonInput placeholder='Username' debounce={DEBOUNCE_MS} value={username} onIonInput={this.onUsernameChange} />
               {this.renderUsernameErrors()}
             </ion-item>
             <ion-item>
-              <ion-label stacked color={!passwordErrors || passwordErrors.passes ? 'primary' : 'danger'}>Password</ion-label>
+              <ion-label position='stacked' color={!passwordErrors || passwordErrors.passes ? 'primary' : 'danger'}>Password</ion-label>
               <IonInput type='password' debounce={DEBOUNCE_MS} placeholder='Password' value={password} onIonInput={this.onPasswordChange} />
               {this.renderPasswordErrors()}
             </ion-item>
             <ion-item>
-              <ion-label stacked color={passwordsMatch ? 'primary' : 'danger'}>Verify Password</ion-label>
+              <ion-label position='stacked' color={passwordsMatch ? 'primary' : 'danger'}>Verify Password</ion-label>
               <IonInput type='password' debounce={DEBOUNCE_MS} placeholder='Verify Password' value={verifyPassword} onIonInput={this.onVerifyPasswordChange} />
               {
                 !passwordsMatch

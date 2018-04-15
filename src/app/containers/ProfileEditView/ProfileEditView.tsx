@@ -99,11 +99,11 @@ export class ProfileEditView extends React.Component<Props, State> {
               <h2>{user.email}</h2>
             </ion-item>
             <ion-item>
-              <ion-label color='tertiary' stacked>First Name</ion-label>
+              <ion-label color='tertiary' position='stacked'>First Name</ion-label>
               <Input autofocus value={firstName} placeholder='First Name' onIonInput={this.setStateVal('firstName')} />
             </ion-item>
             <ion-item>
-              <ion-label color='tertiary' stacked>Last Name</ion-label>
+              <ion-label color='tertiary' position='stacked'>Last Name</ion-label>
               <Input value={lastName} placeholder='Last Name' onIonInput={this.setStateVal('lastName')} />
             </ion-item>
           </ion-list>

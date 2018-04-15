@@ -1,5 +1,5 @@
 
-import { MongoClient } from 'mongodb'
+import { MongoClient, Server } from 'mongodb'
 
 import { singletonPromise } from './singletonPromise'
 

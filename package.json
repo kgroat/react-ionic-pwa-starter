@@ -84,7 +84,7 @@
     "web-push": "^3.3.0"
   },
   "devDependencies": {
-    "@ionic/core": "^0.1.5",
+    "@ionic/core": "^4.0.0-alpha.2",
     "@types/bcrypt": "^1.0.0",
     "@types/ejs": "^2.5.0",
     "@types/enzyme": "^3.1.9",
@@ -144,6 +144,7 @@
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.2.0",
     "resolve-url-loader": "^2.3.0",
+    "rxjs": "^5.5.9",
     "sass-loader": "^6.0.7",
     "sleep-ms": "^2.0.1",
     "string-replace-webpack-plugin": "^0.1.3",
